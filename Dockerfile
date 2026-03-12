@@ -1,4 +1,7 @@
-FROM nginx:alpine
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM node:18-alpine
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY index.js .
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "index.js"]
